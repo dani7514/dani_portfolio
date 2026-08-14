@@ -1,0 +1,507 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Ubuntu", system-ui, sans-serif;
+  --font-logo: "Satisfy", cursive;
+  --font-mono: "Ubuntu Mono", ui-monospace, monospace;
+  --color-background: var(--background);
+}
+
+:root,
+[data-theme="default"] {
+  --background: hsl(0, 0%, 0%);
+  --text: hsl(0, 0%, 100%);
+  --primary: 264, 100%, 50%;
+  --secondary: 300, 100%, 50%;
+  --primaryLite: hsla(264, 100%, 50%, 0.6);
+  --primaryLiteAlt: hsla(264, 100%, 50%, 0.3);
+  --secondaryLite: hsla(300, 100%, 50%, 0.6);
+  --headerGradient: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent);
+  --orbitDotColor: hsl(0, 0%, 100%);
+  --orbitGradient: conic-gradient(
+    transparent,
+    transparent,
+    hsl(var(--primary)),
+    hsl(var(--secondary)),
+    hsl(0, 0%, 100%)
+  );
+  --orbitGradientAlt: conic-gradient(
+    hsl(0, 0%, 100%),
+    hsl(var(--primary)),
+    hsl(var(--secondary)),
+    transparent,
+    transparent
+  );
+  --SkillGradient: linear-gradient(
+    45deg,
+    hsla(264, 60%, 10%, 0.5),
+    hsla(300, 50%, 10%, 0.2)
+  );
+  --gradient: linear-gradient(
+    to right,
+    hsl(var(--secondary)),
+    hsl(var(--primary)),
+    hsl(var(--primary)),
+    hsl(var(--secondary))
+  );
+  --cardGradient: linear-gradient(45deg, hsl(0, 0%, 1%), var(--primaryLiteAlt));
+  --overlayGradient: radial-gradient(
+    farthest-corner at 100% 0%,
+    hsla(0, 0%, 5%, 0.5),
+    transparent
+  );
+  --contactSocialColor: hsla(0, 0%, 100%, 0.4);
+  --socialIconColor: hsl(0, 0%, 100%);
+  --status-live-fg: #4ade80;
+  --status-live-bg: rgba(34, 197, 94, 0.16);
+  --status-live-border: rgba(74, 222, 128, 0.55);
+  --status-warn-fg: #fbbf24;
+  --status-warn-bg: rgba(245, 158, 11, 0.16);
+  --status-warn-border: rgba(251, 191, 36, 0.55);
+}
+
+[data-theme="ocean"] {
+  --primary: 192, 100%, 45%;
+  --secondary: 210, 100%, 55%;
+  --primaryLite: hsla(192, 100%, 45%, 0.6);
+  --primaryLiteAlt: hsla(192, 100%, 45%, 0.3);
+  --secondaryLite: hsla(210, 100%, 55%, 0.6);
+  --orbitGradient: conic-gradient(
+    transparent,
+    transparent,
+    hsl(var(--primary)),
+    hsl(var(--secondary)),
+    hsl(0, 0%, 100%)
+  );
+  --gradient: linear-gradient(
+    to right,
+    hsl(var(--secondary)),
+    hsl(var(--primary)),
+    hsl(var(--primary)),
+    hsl(var(--secondary))
+  );
+}
+
+[data-theme="forest"] {
+  --primary: 142, 76%, 45%;
+  --secondary: 160, 80%, 40%;
+  --primaryLite: hsla(142, 76%, 45%, 0.6);
+  --primaryLiteAlt: hsla(142, 76%, 45%, 0.3);
+  --secondaryLite: hsla(160, 80%, 40%, 0.6);
+  --gradient: linear-gradient(
+    to right,
+    hsl(var(--secondary)),
+    hsl(var(--primary)),
+    hsl(var(--primary)),
+    hsl(var(--secondary))
+  );
+}
+
+[data-theme="sunset"] {
+  --primary: 24, 95%, 53%;
+  --secondary: 340, 90%, 55%;
+  --primaryLite: hsla(24, 95%, 53%, 0.6);
+  --primaryLiteAlt: hsla(24, 95%, 53%, 0.3);
+  --secondaryLite: hsla(340, 90%, 55%, 0.6);
+  --gradient: linear-gradient(
+    to right,
+    hsl(var(--secondary)),
+    hsl(var(--primary)),
+    hsl(var(--primary)),
+    hsl(var(--secondary))
+  );
+}
+
+* {
+  scroll-behavior: auto;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: hsl(var(--primary));
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--primary));
+  border-radius: 14px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+@keyframes gradientPan {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-logo {
+  font-family: var(--font-logo);
+}
+
+.gradientText {
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200%;
+  animation: gradientPan 5s linear infinite;
+}
+
+.flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerGradient {
+  background: var(--headerGradient);
+}
+
+.spring-element-performance {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Header */
+.Header_Nav a,
+.Header_Nav button {
+  position: relative;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.75;
+  transition: opacity 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.Header_Nav a:hover,
+.Header_Nav button:hover,
+.Header_Nav a.active,
+.Header_Nav button.active {
+  opacity: 1;
+}
+
+.Header_Nav a::after,
+.Header_Nav button::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--orbitDotColor);
+  transform: scaleX(0);
+  transition: transform 0.25s ease-out;
+}
+
+.Header_Nav a.active::after,
+.Header_Nav button.active::after {
+  transform: scaleX(1);
+}
+
+.Header_ActionBtn {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.Header_ActionBtn::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    hsl(var(--primary)),
+    hsl(var(--secondary)),
+    hsl(var(--primary))
+  );
+  animation: spin 5s linear infinite;
+}
+
+.Header_ActionBtn > span {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35em 1.2em;
+  margin: 2px;
+  background: var(--background);
+  color: var(--text);
+  border-radius: inherit;
+  font-size: 0.85rem;
+}
+
+/* Hero Orbit */
+.Hero_Trail {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: spin 6s linear infinite;
+}
+
+.Hero_Trail::before {
+  content: "";
+  width: calc(100% - 1%);
+  aspect-ratio: 1;
+  inset: 0;
+  margin: auto;
+  border-radius: 50%;
+  position: absolute;
+  background-color: var(--background);
+}
+
+.Trail1 {
+  width: 60%;
+  background: var(--orbitGradient);
+  z-index: 5;
+}
+.Trail2 {
+  width: 70%;
+  animation-duration: 8s;
+  animation-direction: reverse;
+  background: var(--orbitGradientAlt);
+  z-index: 4;
+}
+.Trail3 {
+  width: 80%;
+  animation-duration: 10s;
+  background: var(--orbitGradient);
+  z-index: 3;
+}
+.Trail4 {
+  width: 90%;
+  animation-duration: 12s;
+  animation-direction: reverse;
+  background: var(--orbitGradientAlt);
+  z-index: 2;
+}
+
+.Orbit_Dot {
+  width: 0.5em;
+  aspect-ratio: 1;
+  background-color: var(--orbitDotColor);
+  border-radius: 0 50% 50%;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: -0.2em;
+  left: 50%;
+  box-shadow: 0 0 10px var(--orbitDotColor);
+  outline: 0.5px solid var(--orbitDotColor);
+}
+
+.Trail2 .Orbit_Dot,
+.Trail4 .Orbit_Dot {
+  transform: rotate(140deg);
+}
+
+@media (min-width: 1024px) {
+  .Hero_Orbit:hover .Orbit_Dot {
+    background-color: var(--background);
+    scale: 1.8;
+  }
+}
+
+/* Layout */
+.page-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 4vw, 3rem);
+}
+
+.section-block {
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+/* Section Titles */
+.Title-Tag {
+  font-family: var(--font-display);
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  margin-bottom: 2.5rem;
+  position: relative;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.Title-Tag.open {
+  justify-content: flex-start;
+}
+
+.Title-Tag.close {
+  justify-content: flex-end;
+  padding-top: 0.5em;
+  opacity: 0.7;
+}
+
+.Title-Tag span,
+.Title-Tag p {
+  z-index: 1;
+  background-color: var(--background);
+  padding-inline: 0.25em;
+}
+
+.Title-Tag.primary span:first-child,
+.Title-Tag.primary p {
+  color: hsl(var(--primary));
+}
+
+.Title_Line::after {
+  content: "";
+  position: absolute;
+  margin-top: 0.3em;
+  width: 100%;
+  height: 2px;
+  z-index: 0;
+  background-color: var(--primaryLite);
+}
+
+/* Skills */
+.skill-pill {
+  background: var(--SkillGradient);
+  border: 1px solid var(--primaryLiteAlt);
+  border-radius: 0.65em;
+  padding: 0.65em 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  transition: transform 0.25s, box-shadow 0.25s;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.skill-pill:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px var(--primaryLiteAlt);
+}
+
+.skill-category-title {
+  font-family: var(--font-display);
+  color: hsl(var(--primary));
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  margin-bottom: 1.25rem;
+}
+
+.skill-category-title span {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Projects */
+.statusLive {
+  color: var(--status-live-fg);
+  background: var(--status-live-bg);
+  border: 1px solid var(--status-live-border);
+}
+
+.statusBuilding {
+  color: var(--status-warn-fg);
+  background: var(--status-warn-bg);
+  border: 1px solid var(--status-warn-border);
+}
+
+.project-card {
+  background: var(--cardGradient);
+  border-radius: 1em;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px var(--primaryLiteAlt);
+}
+
+.project-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-img-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlayGradient);
+  pointer-events: none;
+}
+
+.project-img-wrap img {
+  width: 100%;
+  height: clamp(220px, 28vw, 280px);
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.project-card:hover .project-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* Contact orbit */
+.social-orbit {
+  width: min(420px, 85vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px dashed var(--contactSocialColor);
+  position: relative;
+}
+
+.social-orbit a {
+  position: absolute;
+  width: 3.75rem;
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+  border: 2px dashed var(--contactSocialColor);
+  border-radius: 50%;
+  color: var(--socialIconColor);
+  transition: transform 0.3s, scale 0.3s;
+}
+
+.social-orbit a:hover {
+  transform: scale(1.15);
+  color: hsl(var(--primary));
+}
+
+img {
+  user-select: none;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
