@@ -1,21 +1,56 @@
 import { useState } from "react";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "./SocialIcons";
 import { personalInfo } from "../data/portfolio";
 import SectionTitle from "./SectionTitle";
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+type FormState = { name: string; email: string; message: string };
+type SubmitState = "idle" | "loading" | "success" | "error";
 
-  const submit = (e: React.FormEvent) => {
+export default function Contact() {
+  const [form, setForm] = useState<FormState>({ name: "", email: "", message: "" });
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`,
-    );
-    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setSubmitState("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(personalInfo.email)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            message: form.message,
+            _subject: `Portfolio contact from ${form.name}`,
+            _template: "table",
+            _captcha: "false",
+          }),
+        },
+      );
+
+      const data = (await response.json()) as { success?: string; message?: string };
+
+      if (!response.ok) {
+        throw new Error(data.message ?? "Failed to send message. Please try again.");
+      }
+
+      setSubmitState("success");
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      setSubmitState("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong. Please try again.",
+      );
+    }
   };
 
   return (
@@ -76,6 +111,15 @@ export default function Contact() {
             className="Fade_Up w-full max-w-lg space-y-6 p-8 lg:p-10 rounded-2xl"
             style={{ background: "var(--cardGradient)" }}
           >
+            <input
+              type="text"
+              name="_honey"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
+
             {(["name", "email"] as const).map((field) => (
               <div key={field}>
                 <label
@@ -86,13 +130,15 @@ export default function Contact() {
                 </label>
                 <input
                   id={field}
+                  name={field}
                   type={field === "email" ? "email" : "text"}
                   required
+                  disabled={submitState === "loading"}
                   value={form[field]}
                   onChange={(e) =>
                     setForm({ ...form, [field]: e.target.value })
                   }
-                  className="w-full px-5 py-3.5 rounded-xl bg-black/40 border border-white/10 outline-none focus:border-purple-500 text-base"
+                  className="w-full px-5 py-3.5 rounded-xl bg-black/40 border border-white/10 outline-none focus:border-purple-500 text-base disabled:opacity-60"
                 />
               </div>
             ))}
@@ -105,21 +151,44 @@ export default function Contact() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 required
                 rows={5}
+                disabled={submitState === "loading"}
                 value={form.message}
                 onChange={(e) =>
                   setForm({ ...form, message: e.target.value })
                 }
-                className="w-full px-5 py-3.5 rounded-xl bg-black/40 border border-white/10 outline-none focus:border-purple-500 text-base resize-none"
+                className="w-full px-5 py-3.5 rounded-xl bg-black/40 border border-white/10 outline-none focus:border-purple-500 text-base resize-none disabled:opacity-60"
               />
             </div>
+
+            {submitState === "success" && (
+              <p className="flex items-center gap-2 text-sm text-green-400">
+                <CheckCircle2 size={18} />
+                Message sent! I'll get back to you soon.
+              </p>
+            )}
+
+            {submitState === "error" && (
+              <p className="flex items-center gap-2 text-sm text-red-400">
+                <AlertCircle size={18} />
+                {errorMessage}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full py-4 rounded-xl text-lg font-medium gradientText border border-white/10 hover:border-purple-500/50 transition-colors"
+              disabled={submitState === "loading"}
+              className="w-full py-4 rounded-xl text-lg font-medium text-white border border-white/10 hover:border-purple-500/50 transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               style={{ background: "var(--SkillGradient)" }}
             >
-              {sent ? "Opening email..." : "Submit"}
+              {submitState === "loading" && <Loader2 size={20} className="animate-spin" />}
+              {submitState === "loading"
+                ? "Sending..."
+                : submitState === "success"
+                  ? "Send another message"
+                  : "Submit"}
             </button>
           </form>
         </div>
