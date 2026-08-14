@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#12121a"/>
+  <rect x="40" y="40" width="720" height="370" rx="16" fill="#16161f" stroke="#2a2a3a"/>
+  <text x="400" y="210" text-anchor="middle" fill="#22c55e" font-family="monospace" font-size="52" font-weight="bold">Gitlytics</text>
+  <text x="400" y="270" text-anchor="middle" fill="#9898a8" font-family="monospace" font-size="22">GitHub Analytics Dashboard</text>
+  <path d="M300 150 L350 200 L300 250" stroke="#6366f1" stroke-width="4" fill="none"/>
+  <path d="M500 150 L450 200 L500 250" stroke="#6366f1" stroke-width="4" fill="none"/>
+</svg>

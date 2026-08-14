@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#12121a"/>
+  <rect x="40" y="40" width="720" height="370" rx="16" fill="#16161f" stroke="#2a2a3a"/>
+  <text x="400" y="210" text-anchor="middle" fill="#6366f1" font-family="monospace" font-size="52" font-weight="bold">Language</text>
+  <text x="400" y="270" text-anchor="middle" fill="#9898a8" font-family="monospace" font-size="26">Learning App</text>
+</svg>
