@@ -41,6 +41,7 @@ export default function Navbar() {
             href={personalInfo.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
+            download="Daniel-Misganaw-Resume.pdf"
           >
             <span>
               Resume

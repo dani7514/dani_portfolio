@@ -13,7 +13,7 @@ export const personalInfo = {
     leetcode: "https://leetcode.com/u/Dani192021/",
     upwork: "https://www.upwork.com/freelancers/~019c52f42a54a861d3",
   },
-  resumeUrl: "#",
+  resumeUrl: "/resume/Daniel-Misganaw-Resume.pdf",
 };
 
 export const heroTags = [
