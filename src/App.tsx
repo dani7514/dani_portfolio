@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import {
   useChiragAnimations,
   useActiveNav,
@@ -27,6 +28,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <Analytics />
     </>
   );
 }
