@@ -36,13 +36,13 @@ export default function Projects() {
               <div className="project-img-wrap relative">
                 <img
                   src={project.image}
-                  alt={`${project.title} screenshot`}
+                  alt=""
                   loading="lazy"
                 />
                 <div className="absolute bottom-4 left-4 flex items-center gap-3 z-10">
                   <img
                     src={project.logo}
-                    alt={`${project.title} logo`}
+                    alt=""
                     className="w-14 h-14 rounded-xl object-cover border"
                     style={{ borderColor: "var(--primaryLiteAlt)" }}
                   />
@@ -62,15 +62,17 @@ export default function Projects() {
                     {project.title}
                   </h3>
                   <div className="flex gap-3 shrink-0">
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="opacity-70 hover:opacity-100"
-                      aria-label={`${project.title} GitHub`}
-                    >
-                      <GitHubIcon size={22} />
-                    </a>
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="opacity-70 hover:opacity-100"
+                        aria-label={`${project.title} GitHub`}
+                      >
+                        <GitHubIcon size={22} />
+                      </a>
+                    )}
                     {project.links.live !== "#" && (
                       <a
                         href={project.links.live}

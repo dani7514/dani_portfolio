@@ -185,6 +185,20 @@ export const projects = [
     },
   },
   {
+    id: "fast-fingers",
+    title: "Fast Fingers",
+    status: "LIVE" as const,
+    category: "Typing · Web",
+    description:
+      "Practice typing with live speed and accuracy feedback, or race your friends.",
+    image: "/projects/fast-fingers.svg",
+    logo: "/projects/fast-fingers.svg",
+    tech: ["Firebase"],
+    links: {
+      live: "https://fast-fingers-hazel.vercel.app/",
+    },
+  },
+  {
     id: "csbsn",
     title: "CSBSN",
     status: "LIVE" as const,
