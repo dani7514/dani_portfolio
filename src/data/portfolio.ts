@@ -191,7 +191,7 @@ export const projects = [
     category: "Typing · Web",
     description:
       "Practice typing with live speed and accuracy feedback, or race your friends.",
-    image: "/projects/fast-fingers.svg",
+    image: "/projects/fast-fingers.png",
     logo: "/projects/fast-fingers.svg",
     tech: ["Firebase"],
     links: {
