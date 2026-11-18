@@ -39,14 +39,16 @@ export default function Projects() {
                   alt=""
                   loading="lazy"
                 />
-                <div className="absolute bottom-4 left-4 flex items-center gap-3 z-10">
-                  <img
-                    src={project.logo}
-                    alt=""
-                    className="w-14 h-14 rounded-xl object-cover border"
-                    style={{ borderColor: "var(--primaryLiteAlt)" }}
-                  />
-                </div>
+                {project.logo && (
+                  <div className="absolute bottom-4 left-4 flex items-center gap-3 z-10">
+                    <img
+                      src={project.logo}
+                      alt=""
+                      className="w-14 h-14 rounded-xl object-cover border"
+                      style={{ borderColor: "var(--primaryLiteAlt)" }}
+                    />
+                  </div>
+                )}
                 <span
                   className={`absolute top-4 right-4 z-10 text-xs font-mono px-3 py-1 rounded-full uppercase tracking-wider ${
                     project.status === "LIVE" ? "statusLive" : "statusBuilding"

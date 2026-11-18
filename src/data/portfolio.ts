@@ -192,7 +192,6 @@ export const projects = [
     description:
       "Practice typing with live speed and accuracy feedback, or race your friends.",
     image: "/projects/fast-fingers.png",
-    logo: "/projects/fast-fingers.svg",
     tech: ["Firebase"],
     links: {
       live: "https://fast-fingers-hazel.vercel.app/",
